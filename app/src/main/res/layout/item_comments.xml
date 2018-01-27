@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="4dp"
+    android:layout_margin="4dp"
+    android:layout_gravity="center"
+    android:background="#FFF8E1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_cmt_user_img"
+            android:layout_width="79dp"
+            android:layout_height="79dp"
+            android:paddingRight="4dp"
+            android:src="@drawable/imgcooked"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_cmt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F9A825"
+                android:text="Nguyễn Sĩ Hưng"
+                android:paddingLeft="4dp"
+                android:textColor="#ffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/item_cmt"
+                android:paddingLeft="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Món nay ăn ngon quá mà mình chưa được ăn bao giờ"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:text="Thành quả thực hiện: "
+                    android:textColor="#1B5E20"
+                    android:textStyle="italic" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/item_cmt_btn_result"
+                        android:layout_width="32dp"
+                        android:layout_height="24dp"
+                        android:background="#fff"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_imgresult" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

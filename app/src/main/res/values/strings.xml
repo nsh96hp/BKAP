@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">CookCook</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="arr_unit">
+        <item>Hour</item>
+        <item>Minutes</item>
+        <item>Day</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
+    <string-array name="arr_amount">
+        <item>Gam</item>
+        <item>Kg</item>
+        <item>Lit</item>
+        <item>ml</item>
+        <item>Package</item>
+    </string-array>
+</resources>

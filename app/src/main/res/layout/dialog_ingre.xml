@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:padding="8dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="#455A64"
+        android:text="ADD INGRE"/>
+
+    <EditText
+        android:id="@+id/add_dialog_content_ingre"
+        android:layout_width="match_parent"
+        android:layout_height="138dp"
+        android:gravity="center"
+        android:hint="Content"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/add_dialog_amount_ingre"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Amount"/>
+        <Spinner
+            android:id="@+id/add_dialog_unit_ingre"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:entries="@array/arr_amount">
+        </Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/add_dialog_ingre_ok"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#33691E"
+            android:textColor="#fff"
+            android:text="OK"/>
+        <Button
+            android:id="@+id/add_dialog_ingre_exit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#E53935"
+            android:textColor="#fff"
+
+            android:text="Exit">
+        </Button>
+    </LinearLayout>
+</LinearLayout>

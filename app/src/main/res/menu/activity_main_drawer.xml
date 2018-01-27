@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_favorite"
+            android:title="Favorites" />
+        <item
+            android:id="@+id/nav_suggestions"
+            android:icon="@drawable/ic_suggestions"
+            android:title="Suggestions" />
+        <item
+            android:id="@+id/nav_mycooked"
+            android:icon="@drawable/ic_cooked"
+            android:title="My Cooked" />
+        <item
+            android:id="@+id/nav_plan"
+            android:icon="@drawable/ic_plan"
+            android:title="My Plans" />
+
+        <item
+            android:id="@+id/nav_shopping"
+            android:icon="@drawable/ic_shopping"
+            android:title="Shopping list" />
+        <item
+            android:id="@+id/nav_friend"
+            android:icon="@drawable/ic_friend"
+            android:title="List Friend" />
+        <item
+            android:id="@+id/nav_group"
+            android:icon="@drawable/ic_chat"
+            android:title="Group chat" />
+        <item
+            android:id="@+id/nav_download"
+            android:icon="@drawable/ic_downloaded"
+            android:title="Downloaded" />
+    </group>
+
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_setting"
+                android:title="Setting" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_help"
+                android:title="Help" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

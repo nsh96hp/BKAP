@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:padding="8dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="#455A64"
+        android:text="ADD STEP"/>
+    <EditText
+        android:id="@+id/add_dialog_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:gravity="center"
+        android:hint="Num Step"/>
+
+    <EditText
+        android:id="@+id/add_dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="138dp"
+        android:gravity="center"
+        android:hint="Content"
+        android:inputType="number" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/add_dialog_time"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:hint="Time"/>
+        <Spinner
+            android:id="@+id/add_dialog_unit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:entries="@array/arr_unit">
+        </Spinner>
+    </LinearLayout>
+    /////////////////Camera
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#5d4037"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+    </View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/add_camera_img_steps"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:background="#FFF8E1"
+            android:src="@drawable/ic_camera" />
+
+        <ImageButton
+            android:id="@+id/add_gallery_img_steps"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:background="#FFF8E1"
+            android:src="@drawable/ic_photo_gallery" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF8E1"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Camera"
+            android:textColor="#00ACC1" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Gallery"
+            android:textColor="#283592" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#5d4037"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"></View>
+    //////////////////////
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/add_dialog_step_ok"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#33691E"
+            android:textColor="#fff"
+            android:text="OK"/>
+        <Button
+            android:id="@+id/add_dialog_step_exit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#E53935"
+            android:textColor="#fff"
+            android:text="Exit">
+        </Button>
+    </LinearLayout>
+</LinearLayout>

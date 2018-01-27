@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "757184127720",
+    "firebase_url": "https://cookcook-c277c.firebaseio.com",
+    "project_id": "cookcook-c277c",
+    "storage_bucket": "cookcook-c277c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757184127720:android:82b2e76fe50f74f3",
+        "android_client_info": {
+          "package_name": "com.test.cookcook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757184127720-l5q46h3lge89v13p7vuqnno5lchsbsak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.test.cookcook",
+            "certificate_hash": "bf1ebe2a45a4a3006d7475ae5cb442c31ea0681c"
+          }
+        },
+        {
+          "client_id": "757184127720-esok6kv259d6l1irpm2khjo8eeoe0mj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPzHR1y0DY98rbe2s_fot-aHSIGmsW3p8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757184127720-esok6kv259d6l1irpm2khjo8eeoe0mj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
