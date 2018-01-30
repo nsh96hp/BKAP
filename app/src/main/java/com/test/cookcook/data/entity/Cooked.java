@@ -13,10 +13,10 @@ public class Cooked implements Serializable{
     private String name;
     private String intro;
     private int people;
-    private int like; //Chuyen sang like =))
+    private int like;
     private int share;
     private int download;
-    private String idUser; ///////////Xem set de String
+    private String idUser;
     private String image;
     /////////////////////
     //private int flag; //voi flag la 0 thi món chưa được đăng tải và chỉ người chủ mới thấy. 1 khi đăng tải món rồi <<< Xem xét ở 2 mới public và người chuyển sang 2 là mình, mình duyệt bài >>>
