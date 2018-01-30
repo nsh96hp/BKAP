@@ -117,7 +117,7 @@ public class AddCookedFragment extends Fragment {
         add_btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cooked cooked = new Cooked(add_name_cooked.getText().toString(), add_intro_cooked.getText().toString(), Integer.parseInt(add_num.getText().toString()), 1, "Name random img");
+                Cooked cooked = new Cooked(add_name_cooked.getText().toString(), add_intro_cooked.getText().toString(), Integer.parseInt(add_num.getText().toString()), "User", "Name random img");
                 MainActivity mainActivity = (MainActivity) getActivity();
                 String key = mainActivity.getMyData();
 

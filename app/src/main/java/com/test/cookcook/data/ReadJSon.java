@@ -41,13 +41,13 @@ public class ReadJSon {
                     cook[j]=result.getString(j);
                 }
                 Cooked cooked = new Cooked();
-                cooked.setIdCooked(Integer.parseInt(cook[0]));
+                cooked.setIdCooked(cook[0]);
                 cooked.setName(cook[1]);
                 cooked.setIntro(cook[2]);
                 cooked.setPeople(Integer.parseInt(cook[3]));
-                cooked.setLikee(0);
+                cooked.setLike(0);
                 cooked.setShare(0);
-                cooked.setIdUser(Integer.parseInt(cook[6]));
+                cooked.setIdUser(cook[6]);
                 cooked.setImage(cook[7]);
                 lstCooked.add(cooked);
             }
@@ -110,7 +110,7 @@ public class ReadJSon {
                 }
                 Steps steps=new Steps();
                 steps.setIdSteps(Integer.parseInt(temp[0]));
-                steps.setIdCooked(Integer.parseInt(temp[1]));
+                steps.setIdCooked(temp[1]);
                 steps.setNum(Integer.parseInt(temp[2]));
                 steps.setName(temp[3]);
                 steps.setTime(Double.parseDouble(temp[4]));

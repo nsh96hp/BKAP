@@ -9,17 +9,50 @@ import java.util.Map;
  */
 
 public class Cooked implements Serializable{
-    private int idCooked; //////////Xem xet boooooooooooooooo
+    private String idCooked; //////////
     private String name;
     private String intro;
     private int people;
-    private int likee; //Chuyen sang like =))
+    private int like; //Chuyen sang like =))
     private int share;
-    private int idUser; ///////////Xem set de String
+    private int download;
+    private String idUser; ///////////Xem set de String
     private String image;
     /////////////////////
     //private int flag; //voi flag la 0 thi món chưa được đăng tải và chỉ người chủ mới thấy. 1 khi đăng tải món rồi <<< Xem xét ở 2 mới public và người chuyển sang 2 là mình, mình duyệt bài >>>
     //Them trang thai, luot tai
+
+
+    public Cooked(String name, String intro, int people, int like, int share, int download, String idUser, String image) {
+        this.name = name;
+        this.intro = intro;
+        this.people = people;
+        this.like = like;
+        this.share = share;
+        this.download = download;
+        this.idUser = idUser;
+        this.image = image;
+    }
+
+    public Cooked(String name, String intro, int people, String idUser, String image) {
+        this.name = name;
+        this.intro = intro;
+        this.people = people;
+        this.idUser = idUser;
+        this.image = image;
+    }
+
+    public Cooked(String idCooked, String name, String intro, int people, int like, int share, int download, String idUser, String image) {
+        this.idCooked = idCooked;
+        this.name = name;
+        this.intro = intro;
+        this.people = people;
+        this.like = like;
+        this.share = share;
+        this.download = download;
+        this.idUser = idUser;
+        this.image = image;
+    }
 
     public String getImage() {
         return image;
@@ -29,24 +62,31 @@ public class Cooked implements Serializable{
         this.image = image;
     }
 
-    public Cooked(int idCooked, String name, String intro, int people, int likee, int share, int idUser, String image) {
-        this.idCooked = idCooked;
-        this.name = name;
-        this.intro = intro;
-        this.people = people;
-        this.likee = likee;
-        this.share = share;
-        this.idUser = idUser;
-        this.image = image;
+
+    public int getLike() {
+        return like;
     }
 
-    public Cooked(String name, String intro, int people, int idUser, String image) {
-        this.name = name;
-        this.intro = intro;
-        this.people = people;
-        this.idUser = idUser;
-        this.image = image;
+    public void setLike(int like) {
+        this.like = like;
     }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public int getDownload() {
+        return download;
+    }
+
+    public void setDownload(int download) {
+        this.download = download;
+    }
+
     public Map<String, Object> toMap(){
         HashMap<String, Object> result=new HashMap<>();
         result.put("name",name);
@@ -60,14 +100,6 @@ public class Cooked implements Serializable{
     public Cooked() {
     }
 
-    public int getLikee() {
-        return likee;
-    }
-
-    public void setLikee(int likee) {
-        this.likee = likee;
-    }
-
     public int getShare() {
         return share;
     }
@@ -76,19 +108,12 @@ public class Cooked implements Serializable{
         this.share = share;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
-    public int getIdCooked() {
+    public String getIdCooked() {
         return idCooked;
     }
 
-    public void setIdCooked(int idCooked) {
+    public void setIdCooked(String idCooked) {
         this.idCooked = idCooked;
     }
 

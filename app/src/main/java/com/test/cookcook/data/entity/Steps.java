@@ -6,15 +6,24 @@ package com.test.cookcook.data.entity;
 
 public class Steps {
     private int idSteps;    //Xem xet bo
-    private int idCooked;   //Chuyen String
+    private String idCooked;   //Chuyen String
     private int num; //STT cua buoc dung de sau nay thay doi sap xep buoc
     private String name; //Ten buoc, noi dung buoc....
     private double time; //Thoi gian buoc
     private String unit; //Don vi thoi gian
     private String image;   //Anh cua buoc "co the co hoac khong".
 
-    public Steps(int idSteps, int idCooked, int num, String name, double time, String unit, String image) {
+    public Steps(int idSteps, String idCooked, int num, String name, double time, String unit, String image) {
         this.idSteps = idSteps;
+        this.idCooked = idCooked;
+        this.num = num;
+        this.name = name;
+        this.time = time;
+        this.unit = unit;
+        this.image = image;
+    }
+
+    public Steps(String idCooked, int num, String name, double time, String unit, String image) {
         this.idCooked = idCooked;
         this.num = num;
         this.name = name;
@@ -42,11 +51,11 @@ public class Steps {
         this.idSteps = idSteps;
     }
 
-    public int getIdCooked() {
+    public String getIdCooked() {
         return idCooked;
     }
 
-    public void setIdCooked(int idCooked) {
+    public void setIdCooked(String idCooked) {
         this.idCooked = idCooked;
     }
 

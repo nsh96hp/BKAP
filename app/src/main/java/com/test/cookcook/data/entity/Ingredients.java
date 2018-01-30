@@ -5,7 +5,7 @@ package com.test.cookcook.data.entity;
  */
 
 public class Ingredients {
-    private int idIngre; ///////////////Xem xet bo
+    private int idIngre;
     private String idCooked;
     private String name;
     private double amount; //So luong

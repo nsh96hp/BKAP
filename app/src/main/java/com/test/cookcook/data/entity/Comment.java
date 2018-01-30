@@ -6,16 +6,16 @@ package com.test.cookcook.data.entity;
 
 public class Comment {
     //Cai bang nay t nghi de tren firebase
-    private int idComment;
-    private int idUser;
-    private int idCooked;
+    private String idComment;
+    private String idUser;
+    private String idCooked;
     private String content;
     private String image;
 
     public Comment() {
     }
 
-    public Comment(int idComment, int idUser, int idCooked, String content, String image) {
+    public Comment(String idComment, String idUser, String idCooked, String content, String image) {
         this.idComment = idComment;
         this.idUser = idUser;
         this.idCooked = idCooked;
@@ -23,27 +23,34 @@ public class Comment {
         this.image = image;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
+    public Comment(String idUser, String idCooked, String content, String image) {
         this.idUser = idUser;
+        this.idCooked = idCooked;
+        this.content = content;
+        this.image = image;
     }
 
-    public int getIdComment() {
+    public String getIdComment() {
         return idComment;
     }
 
-    public void setIdComment(int idComment) {
+    public void setIdComment(String idComment) {
         this.idComment = idComment;
     }
 
-    public int getIdCooked() {
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdCooked() {
         return idCooked;
     }
 
-    public void setIdCooked(int idCooked) {
+    public void setIdCooked(String idCooked) {
         this.idCooked = idCooked;
     }
 
