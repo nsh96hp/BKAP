@@ -9,7 +9,7 @@ import java.util.Map;
  */
 
 public class Cooked implements Serializable{
-    private String idCooked; //////////
+    private String idCooked; ////////// cái này có thể thay "trạng thái" trên fb luôn cho đỡ phí - No - Yes
     private String name;
     private String intro;
     private int people;

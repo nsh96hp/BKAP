@@ -19,6 +19,13 @@ public class Ingredients {
         this.unit = unit;
     }
 
+    public Ingredients(String idCooked, String name, double amount, String unit) {
+        this.idCooked = idCooked;
+        this.name = name;
+        this.amount = amount;
+        this.unit = unit;
+    }
+
     public Ingredients() {
     }
 
