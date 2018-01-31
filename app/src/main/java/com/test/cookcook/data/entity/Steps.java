@@ -32,6 +32,13 @@ public class Steps {
         this.image = image;
     }
 
+    public Steps(String idCooked, int num, String name, double time, String unit) {
+        this.idCooked = idCooked;
+        this.num = num;
+        this.name = name;
+        this.time = time;
+        this.unit = unit;
+    }
 
     public Steps() {
     }
@@ -81,10 +88,6 @@ public class Steps {
     }
 
     public void setTime(double time) {
-        this.time = time;
-    }
-
-    public void setTime(int time) {
         this.time = time;
     }
 

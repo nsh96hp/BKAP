@@ -9,7 +9,7 @@ import java.util.Map;
  */
 
 public class Cooked implements Serializable{
-    private String idCooked; ////////// cái này có thể thay "trạng thái" trên fb luôn cho đỡ phí - No - Yes
+    private String idCooked; ////////// cái này có thể thay "trạng thái" trên fb luôn cho đỡ phí - NoUP - UP
     private String name;
     private String intro;
     private int people;
@@ -54,6 +54,15 @@ public class Cooked implements Serializable{
         this.image = image;
     }
 
+    public Cooked(String idCooked, String name, String intro, int people, String idUser, String image) {
+        this.idCooked = idCooked;
+        this.name = name;
+        this.intro = intro;
+        this.people = people;
+        this.idUser = idUser;
+        this.image = image;
+    }
+
     public String getImage() {
         return image;
     }
@@ -89,6 +98,7 @@ public class Cooked implements Serializable{
 
     public Map<String, Object> toMap(){
         HashMap<String, Object> result=new HashMap<>();
+        result.put("idCooked",idCooked);
         result.put("name",name);
         result.put("intro",intro);
         result.put("people",people);

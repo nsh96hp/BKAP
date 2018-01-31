@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 String key = mData.push().getKey();
-                Cooked cooked=new Cooked("1","Name","intro",1,1,1,1,"User","image");
+                Cooked cooked=new Cooked("NoUp","Name","intro",1,1,1,1,"User","image");
                 mData.child("Cooked").child(key).setValue(cooked);
 
                 keyID=key;

@@ -42,6 +42,7 @@ import com.test.cookcook.MainActivity;
 import com.test.cookcook.R;
 import com.test.cookcook.data.entity.Cooked;
 import com.test.cookcook.data.entity.Ingredients;
+import com.test.cookcook.data.entity.Steps;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -64,6 +65,7 @@ public class AddCookedFragment extends Fragment {
     FirebaseStorage storage;
     StorageReference storageReference;
     private Uri filePath;
+    private Uri filePath_Step;
     public AddCookedFragment() {
         // Required empty public constructor
     }
@@ -108,7 +110,6 @@ public class AddCookedFragment extends Fragment {
                     public void onClick(View v) {
                         dialog.dismiss();
                         Log.e("Chon: ", " tai tu may");
-
                         chooseImage();
                     }
                 });
@@ -131,7 +132,7 @@ public class AddCookedFragment extends Fragment {
         add_btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cooked cooked = new Cooked(add_name_cooked.getText().toString(), add_intro_cooked.getText().toString(), Integer.parseInt(add_num.getText().toString()), "User", "Name random img");
+                Cooked cooked = new Cooked("UP",add_name_cooked.getText().toString(), add_intro_cooked.getText().toString(), Integer.parseInt(add_num.getText().toString()), "User", "Name random img");
                 MainActivity mainActivity = (MainActivity) getActivity();
                 String key = mainActivity.getMyData();
 
@@ -241,6 +242,19 @@ public class AddCookedFragment extends Fragment {
                         EditText add_dialog_content=dialog.findViewById(R.id.add_dialog_content);
                         EditText add_dialog_time=dialog.findViewById(R.id.add_dialog_time);
                         Spinner add_dialog_unit=dialog.findViewById(R.id.add_dialog_unit);
+
+                        MainActivity mainActivity = (MainActivity) getActivity();
+                        String key = mainActivity.getMyData();
+                        Log.e("Key cooked ingre: ", key);
+
+                        Steps steps= new Steps();
+                        steps.setIdCooked(key);
+                        steps.setNum(Integer.parseInt(add_dialog_num.getText().toString()));
+                        steps.setName(add_dialog_content.getText().toString());
+                        steps.setTime(Double.parseDouble(add_dialog_time.getText().toString()));
+                        steps.setUnit(add_dialog_unit.getSelectedItem().toString());
+
+                        up_steps(steps);
                         dialog.dismiss();
                     }
                 });
@@ -248,6 +262,31 @@ public class AddCookedFragment extends Fragment {
             }
         });
         return rootView;
+    }
+
+    private void up_steps(Steps steps) {
+
+        if(filePath_Step!=null){
+            String imageName=UUID.randomUUID().toString();// Tên ảnh
+            steps.setImage(imageName);
+            StorageReference ref= storageReference.child("Steps/"+imageName );
+            ref.putFile(filePath_Step);
+        }else {
+            steps.setImage("No Image");
+        }
+
+
+        mData.child("Steps").push().setValue(steps, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError == null) {
+                    Toast.makeText(mContext, "OK", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(mContext, "Fail", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     private void takeaphoto() { //Từ camera
@@ -260,12 +299,12 @@ public class AddCookedFragment extends Fragment {
         startActivityForResult(intent, 1);
     }
 
-    private void takeaphoto_step() {
-        Intent takePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(takePhoto, 2);
+    private void takeaphoto_step() { //Từ camera
+        Intent takePhoto2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(takePhoto2, 2);
     }
 
-    private void chooseImage_step() {
+    private void chooseImage_step() { //Lấy từ máy
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, 3);
     }
@@ -299,11 +338,13 @@ public class AddCookedFragment extends Fragment {
             add_img_food.setImageBitmap(photo);
         }
         if (requestCode==2){
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            filePath_Step=data.getData();
+            Log.e("filePatch_step: -------", filePath_Step.toString());
             //Kết quả ảnh của Steps
         }
         if (requestCode==3){
-            Uri selectedImage = data.getData();
+            filePath_Step=data.getData();
+            Log.e("filePatch_step: -------", filePath_Step.toString());
             //Kết quả ảnh của Steps
         }
     }
