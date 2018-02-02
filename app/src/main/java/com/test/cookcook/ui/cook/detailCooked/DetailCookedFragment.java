@@ -1,4 +1,4 @@
-package com.test.cookcook.ui.defaultCooked.detailCooked;
+package com.test.cookcook.ui.cook.detailCooked;
 
 
 import android.annotation.SuppressLint;

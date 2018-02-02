@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="com.test.cookcook.ui.defaultCooked.detailCooked.DetailCookedFragment">
+    tools:context="com.test.cookcook.ui.cook.detailCooked.DetailCookedFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView

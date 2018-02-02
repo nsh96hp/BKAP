@@ -1,4 +1,4 @@
-package com.test.cookcook.ui.defaultCooked.dfCooked;
+package com.test.cookcook.ui.cook.dfCooked;
 
 import android.content.Context;
 import android.content.res.AssetManager;

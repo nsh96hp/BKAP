@@ -20,8 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.test.cookcook.data.ReadJSon;
 import com.test.cookcook.data.entity.Cooked;
-import com.test.cookcook.ui.defaultCooked.CookedFragment;
-import com.test.cookcook.ui.defaultCooked.addCooked.AddCookedFragment;
+import com.test.cookcook.ui.cook.CookedFragment;
+import com.test.cookcook.ui.cook.addCooked.AddCookedFragment;
 
 import java.util.ArrayList;
 

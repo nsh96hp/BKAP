@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/cooked_layout_margin"
     android:background="#fff"
-    tools:context="com.test.cookcook.ui.defaultCooked.CookedFragment">
+    tools:context="com.test.cookcook.ui.cook.CookedFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -40,6 +40,11 @@
                         android:layout_alignParentBottom="true"
                         android:text="ẨM THỰC VIỆT NAM"/>
                 </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/img_test"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,9 +57,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
                         android:paddingLeft="@dimen/cooked_paddingLeft"
-                        android:text="MÓN THỊT"
+                        android:text="HƯƠNG VỊ NGÀY TẾT"
                         android:layout_gravity="center_vertical"
-                        android:textColor="#00897B"
+                        android:textColor="#d84315"
                         android:textSize="@dimen/cooked_textSize"
                         android:textStyle="bold" />
 
@@ -71,6 +76,42 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rcTitle1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:background="#D7CCC8"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txt_title2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:paddingLeft="@dimen/cooked_paddingLeft"
+                        android:text="CHIA SẺ BÍ QUYẾT"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="#304ffe"
+                        android:textSize="@dimen/cooked_textSize"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/item_btnmore2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/cooked_icon_more_height"
+                        android:layout_weight="1"
+                        android:background="#D7CCC8"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_more" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcTitle2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>

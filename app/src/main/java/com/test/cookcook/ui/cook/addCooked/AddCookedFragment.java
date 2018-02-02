@@ -1,4 +1,4 @@
-package com.test.cookcook.ui.defaultCooked.addCooked;
+package com.test.cookcook.ui.cook.addCooked;
 
 
 import android.annotation.SuppressLint;
@@ -7,7 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,15 +22,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,12 +41,11 @@ import com.test.cookcook.data.entity.Cooked;
 import com.test.cookcook.data.entity.Ingredients;
 import com.test.cookcook.data.entity.Steps;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,10 +58,16 @@ public class AddCookedFragment extends Fragment {
     Button add_btn_up, add_btn_save;
     ImageView add_img_food;
     Context mContext;
+
     FirebaseStorage storage;
     StorageReference storageReference;
+    StorageReference gsReference ;
+    StorageReference pathReference;
+
     private Uri filePath;
     private Uri filePath_Step;
+    private Bitmap bitmap;
+    private Bitmap bitmap_camera;
     public AddCookedFragment() {
         // Required empty public constructor
     }
@@ -83,6 +85,7 @@ public class AddCookedFragment extends Fragment {
         mData = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
         storageReference =storage.getReference();
+
         //Find ID
         add_add_ingre = rootView.findViewById(R.id.add_add_ingre);
         add_add_steps = rootView.findViewById(R.id.add_add_steps);
@@ -264,15 +267,30 @@ public class AddCookedFragment extends Fragment {
         return rootView;
     }
 
-    private void up_steps(Steps steps) {
 
+
+    private void up_steps(Steps steps) {
         if(filePath_Step!=null){
             String imageName=UUID.randomUUID().toString();// Tên ảnh
             steps.setImage(imageName);
             StorageReference ref= storageReference.child("Steps/"+imageName );
             ref.putFile(filePath_Step);
         }else {
-            steps.setImage("No Image");
+            if (bitmap_camera.toString()!=null){
+                Log.e("BITMAPPPPPPPP--: ", "BITMAP.CAMERA");
+
+                String imageName=UUID.randomUUID().toString();// Tên ảnh
+                steps.setImage(imageName);
+                StorageReference ref= storageReference.child("Steps/"+imageName );
+
+                ByteArrayOutputStream baos= new ByteArrayOutputStream();
+                bitmap_camera.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+                ref.putBytes(data);
+            }
+            else {
+                //Them anh mac dinh no img hoac anh background = mau nen
+            }
         }
 
 
@@ -313,37 +331,28 @@ public class AddCookedFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Chuyển sang switch-case
-        if (requestCode == 1) {
+        if (requestCode == 1) { //Tu may
             Uri selectedImage = data.getData();
-            //
             filePath=selectedImage;
-            //
-            Bitmap bitmap= null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(),selectedImage);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Log.e("Bitmap test: ", bitmap.toString());
             Log.e("URI Image from SDCARD: ", selectedImage.toString());
             add_img_food.setImageURI(selectedImage);//
         }
-        if (requestCode == 0) {
-            //
-            filePath=data.getData();
-            //
+        if (requestCode == 0) { //Tu camera
+
             Bitmap photo = (Bitmap) data.getExtras().get("data");
+            bitmap=photo;
             Log.e("Bitmap Img from camera:", photo.toString());
             add_img_food.setImageBitmap(photo);
         }
-        if (requestCode==2){
-            filePath_Step=data.getData();
-            Log.e("filePatch_step: -------", filePath_Step.toString());
-            //Kết quả ảnh của Steps
+        if (requestCode == 2) { //Tu camera
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            bitmap_camera=photo;
+            Log.e("Bitmap Img from camera:", photo.toString());
+            add_img_food.setImageBitmap(photo);
         }
-        if (requestCode==3){
-            filePath_Step=data.getData();
+        if (requestCode==3){//Tu may
+            Uri selectedImage = data.getData();
+            filePath_Step=selectedImage;
             Log.e("filePatch_step: -------", filePath_Step.toString());
             //Kết quả ảnh của Steps
         }
@@ -354,7 +363,7 @@ public class AddCookedFragment extends Fragment {
         cooked.setImage(imageName);
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(key, cooked);
-        mData.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+        mData.child("Cooked").updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError == null) {
@@ -369,27 +378,58 @@ public class AddCookedFragment extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(mContext);
         progressDialog.setTitle("Uploading...");
         progressDialog.show();
-
         StorageReference ref= storageReference.child("Cooked/"+imageName );
-        ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        if(filePath!=null){
+            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    progressDialog.dismiss();
+                    Toast.makeText(mContext, "Uploaded", Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(mContext, "Failed", Toast.LENGTH_LONG).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploaded "+(int)progress+" %");
+                }
+            });
+        }else {
+            if(bitmap.toString()!=null){
+                ByteArrayOutputStream baos= new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+                ref.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        progressDialog.dismiss();
+                        Toast.makeText(mContext, "Uploaded", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(mContext, "Failed", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                        progressDialog.setMessage("Uploaded "+(int)progress+" %");
+                    }
+                });
+            }else {
                 progressDialog.dismiss();
-                Toast.makeText(mContext, "Uploaded", Toast.LENGTH_LONG).show();
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(mContext, "Failed", Toast.LENGTH_LONG).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress=(100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                progressDialog.setMessage("Uploaded "+(int)progress+" %");
-            }
-        });
+
+        }
+
+
     }
 }
