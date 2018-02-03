@@ -427,9 +427,6 @@ public class AddCookedFragment extends Fragment {
             }else {
                 progressDialog.dismiss();
             }
-
         }
-
-
     }
 }

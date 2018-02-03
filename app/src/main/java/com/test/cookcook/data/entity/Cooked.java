@@ -151,4 +151,18 @@ public class Cooked implements Serializable{
         this.people = people;
     }
 
+    @Override
+    public String toString() {
+        return "Cooked{" +
+                "idCooked='" + idCooked + '\'' +
+                ", name='" + name + '\'' +
+                ", intro='" + intro + '\'' +
+                ", people=" + people +
+                ", like=" + like +
+                ", share=" + share +
+                ", download=" + download +
+                ", idUser='" + idUser + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

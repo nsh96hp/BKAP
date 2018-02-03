@@ -19,6 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.test.cookcook.R;
@@ -29,6 +32,10 @@ import com.test.cookcook.data.entity.Ingredients;
 import com.test.cookcook.data.entity.Steps;
 import com.test.cookcook.ui.cook.detailCooked.DetailCookedFragment;
 import com.test.cookcook.ui.cook.dfCooked.AdapterDfc;
+import com.test.cookcook.ui.cook.dfCooked.AdapterOnline;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -41,16 +48,17 @@ public class CookedFragment extends Fragment {
     Context mContext;
     FragmentManager fragmentManager;
     RecyclerView rcTitle1;
+    RecyclerView rcTitle2;
     ArrayList<Cooked> lstCooked = new ArrayList<>();
+    ArrayList<Cooked> lstCooked_online = new ArrayList<>();
     ArrayList<Ingredients> lstIngredients = new ArrayList<>();
     ArrayList<Steps> lstSteps = new ArrayList<>();
     ArrayList<Comment> lstComment = new ArrayList<>();
     AdapterDfc adapterDfc;
-    ImageView imageView;
+    AdapterOnline adapterOnline;
     DatabaseReference mData;
 
 
-    AssetManager assetManager;
 
     public CookedFragment() {
         // Required empty public constructor
@@ -68,7 +76,6 @@ public class CookedFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_cooked, container, false);
 
-        mData = FirebaseDatabase.getInstance().getReference();
 
         lstCooked = ReadJSon.ReadCookedJsonFile(mContext);
 
@@ -79,10 +86,19 @@ public class CookedFragment extends Fragment {
         rcTitle1.setLayoutManager(layoutManager);
         rcTitle1.setAdapter(adapterDfc);
 
+        
+        getDataFromFB();
+        Log.e( "data2---lstCooked: ",lstCooked_online.size()+"");
+        rcTitle2 = rootView.findViewById(R.id.rcTitle2);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(mContext.getApplicationContext());
+        layoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        adapterOnline = new AdapterOnline(mContext, lstCooked_online);
+        rcTitle2.setLayoutManager(layoutManager2);
+        rcTitle2.setAdapter(adapterOnline);
+
         adapterDfc.setOnItemClickListener(new AdapterDfc.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-
                 fragmentManager = getFragmentManager();
                 FragmentTransaction tran = fragmentManager.beginTransaction();
                 //Gui du lieu
@@ -96,40 +112,60 @@ public class CookedFragment extends Fragment {
         });
 
 
-        imageView = rootView.findViewById(R.id.img_test);
-        DownloadImageTask downloadImageTask = new DownloadImageTask(imageView);
-        downloadImageTask.execute("https://firebasestorage.googleapis.com/v0/b/cookcook-c277c.appspot.com/o/Cooked%2F783b18ce-bdc5-4a2c-86ef-5ba65e2bcd38?alt=media&token=5f0a7fca-1379-4c30-be89-3619a8229390");
-//        webview_test=rootView.findViewById(R.id.webview_test);
-//        webview_test.getSettings().setJavaScriptEnabled(true);
-//        webview_test.setWebChromeClient(new WebChromeClient());
-//        webview_test.setWebViewClient(new WebViewClient());
-//        webview_test.loadUrl("https://firebasestorage.googleapis.com/v0/b/cookcook-c277c.appspot.com/o/Cooked%2F783b18ce-bdc5-4a2c-86ef-5ba65e2bcd38?alt=media&token=5f0a7fca-1379-4c30-be89-3619a8229390");
         return rootView;
     }
 
-    //
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
+    private void getDataFromFB() {
+        mData = FirebaseDatabase.getInstance().getReference();
+        mData.child("Cooked").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.e("datasnapshot-------",dataSnapshot.getValue().toString());
+                    try {
+                        JSONObject jsonRoot= new JSONObject(dataSnapshot.getValue().toString());
+                        Cooked cooked= new Cooked();
+                        cooked.setIdUser(jsonRoot.getString("idUser"));
+                        cooked.setImage(jsonRoot.getString("image"));
+                        cooked.setLike(jsonRoot.getInt("like"));
+                        cooked.setDownload(jsonRoot.getInt("download"));
+                        cooked.setPeople(jsonRoot.getInt("people"));
+                        cooked.setShare(jsonRoot.getInt("share"));
+                        cooked.setName(jsonRoot.getString("name"));
+                        cooked.setIntro(jsonRoot.getString("intro"));
+                        cooked.setIdCooked(jsonRoot.getString("idCooked"));
+                        if(cooked.getIdCooked().toString().equals("UP")){
+                            adapterOnline.add(cooked);
+                        }
+                        Log.e("Cooked----", cooked.toString() );
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
             }
-            return mIcon11;
-        }
 
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
+
+    //
 }
